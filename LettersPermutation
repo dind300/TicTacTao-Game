@@ -1,0 +1,48 @@
+import java.util.Random;
+
+import javax.swing.JOptionPane;
+
+public class CharPermutation {
+	public static void main(String[] args) {
+		String letters = JOptionPane.showInputDialog("Please enter letters");
+		lettersPermutation(letters);
+
+	}
+
+	private static void lettersPermutation(String letters) {
+		char[] chars;
+		chars = letters.toCharArray();
+		char[] letterPermutation = new char[chars.length];
+		int charPos = randomChar(chars.length);
+		letterPermutation[0] = chars[charPos];
+		int counter = 1;
+		while (counter < letterPermutation.length) {
+			charPos = randomChar(chars.length);
+			if (isCharExsist(letterPermutation, counter, chars[charPos])) {
+				letterPermutation[counter] = chars[charPos];
+				counter++;
+			}
+		}
+		for (int index = 0; index < letterPermutation.length; index++) {
+			System.out.print(letterPermutation[index]);
+		}
+
+	}
+
+	private static boolean isCharExsist(char[] letterPermutation, int counter, char letter) {
+		int index = 0;
+		while (index < counter) {
+			if (letterPermutation[index] == letter) {
+				return false;
+			}
+			index++;
+		}
+		return true;
+	}
+
+	private static int randomChar(int length) {
+		Random rand = new Random();
+		return rand.nextInt(length);
+	}
+
+}
